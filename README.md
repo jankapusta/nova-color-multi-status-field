@@ -65,11 +65,13 @@ Then add a field into Nova Resource
 ```php
 ColorMultiStatus::make('Events per week', 'events_per_week')
    ->colorMap([
-       0 => 'black',
-       3 => '#66ee99',
-       9 => 'orange',
-       16 => 'red',
-    ])
+            0 => 'white',
+            2 => 'lightgrey',
+            5 => '#d3dc83',
+            8 => '#a7c742',
+            13 => '#7dbd41',
+            34 => '#6cda05',
+        ])
 // optional configuration
   ->iconSize(5) // in pixels - default is 4
   ->iconSpacing(2)   // in pixels - default is 1
