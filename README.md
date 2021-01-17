@@ -37,7 +37,7 @@ $table->json('guests_per_week');
 Laravel model example
 
 ```php
-class Car extends Model {
+class Hotel extends Model {
     protected $casts = [
         'guests_per_week' => 'array',
     ];
