@@ -1,6 +1,6 @@
 {
     "name": "jankapusta/nova-color-multi-status-field",
-    "description": "Laravel Nova field, for showing activity/status history by colorful row of squares (e.g. last 52 weeks activity).",
+    "description": "Laravel Nova field, for showing multiple statuses or activity history by colorful row of squares (e.g. last 52 weeks activity).",
     "keywords": [
         "laravel",
         "nova custom field",

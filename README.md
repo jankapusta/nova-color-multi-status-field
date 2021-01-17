@@ -1,18 +1,19 @@
-# Laravel Nova Boolean multi status Field
+# Laravel Nova Color multi status Field
 
-This field allows to display (and store/edit) multiple boolean values within 1 field as array or object.
+This field allows to display (and store/edit) multiple values within 1 field as array or object.
+It will show values based on color map - as colorful square icons. 
 Usually it is stored as json (but that depends purely on an Eloquent model implementation). 
 
 Field accepts both array and object values.
 If the data is an object, keys will be editable and will be displayed as tooltips (on hover)
 
-[repository on github](https://github.com/jankapusta/nova-boolean-multi-status-field)
+[repository on github](https://github.com/jankapusta/nova-color-multi-status-field)
 
-Posibility to edit boolean vaules (checkboxes) with string keys:
+Possibility to edit values with string keys:
 
 ![Screenshot Form](screenshot-form.png)
 
-Display boolean values using standard Nova icons. Showing keys on hover:
+Display colorful squares based on value-to-color mapping. Showing keys on hover:
 
 ![Screenshot Index](screenshot-index.png)
 
@@ -21,7 +22,7 @@ Display boolean values using standard Nova icons. Showing keys on hover:
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
 
 ```bash
-composer require jankapusta/nova-boolean-multi-status-field
+composer require jankapusta/nova-color-multi-status-field
 ```
 
 ## Usage
@@ -29,7 +30,7 @@ composer require jankapusta/nova-boolean-multi-status-field
 Laravel migration example:
 
 ```php
-$table->json('car_multi_status');
+$table->json('events_per_week');
 ```
 
 
@@ -38,16 +39,22 @@ Laravel model example
 ```php
 class Car extends Model {
     protected $casts = [
-        'car_multi_status' => 'array',
+        'events_per_week' => 'array',
     ];
     // ....
 }
 
 Car::create([
-    'car_multi_status' => [
-      'break_check' => true,
-      'windows_check' => false,
-      'engine_check' => true,
+    'events_per_week' => [
+      'Feb 10' => 5,
+      'Feb 17' => 1,
+      'Feb 24' => 12,
+      'Mar 3' => 4,
+      'Mar 10' => 0,
+      'Mar 17' => 8,
+      'Mar 24' => 14,
+      'Mar 31' => 2,
+      'Apr 7' => 9,
     ],
 ]);
 
@@ -56,9 +63,17 @@ Car::create([
 Then add a field into Nova Resource
 
 ```php
-BooleanMultiStatus::make('Car checks', 'car_multi_status')
+ColorMultiStatus::make('Events per week', 'events_per_week')
+   ->colorMap([
+       0 => 'black',
+       3 => '#66ee99',
+       9 => 'orange',
+       16 => 'red',
+    ])
 // optional configuration
-  ->showKeysAsTooltips(false) // to hide tooltips 
+  ->iconSize(5) // in pixels - default is 4
+  ->iconSpacing(2)   // in pixels - default is 1
+  ->showTooltips(false) // to hide tooltips 
   ->width(80), // in pixels
 ```
 
