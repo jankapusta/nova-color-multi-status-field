@@ -30,7 +30,7 @@ composer require jankapusta/nova-color-multi-status-field
 Laravel migration example:
 
 ```php
-$table->json('events_per_week');
+$table->json('guests_per_week');
 ```
 
 
@@ -39,13 +39,13 @@ Laravel model example
 ```php
 class Car extends Model {
     protected $casts = [
-        'events_per_week' => 'array',
+        'guests_per_week' => 'array',
     ];
     // ....
 }
 
-Car::create([
-    'events_per_week' => [
+Hotel::create([
+    'guests_per_week' => [
       'Feb 10' => 5,
       'Feb 17' => 1,
       'Feb 24' => 12,
@@ -63,7 +63,7 @@ Car::create([
 Then add a field into Nova Resource
 
 ```php
-ColorMultiStatus::make('Events per week', 'events_per_week')
+ColorMultiStatus::make('Events per week', 'guests_per_week')
    ->colorMap([
             0 => 'white',
             2 => 'lightgrey',
