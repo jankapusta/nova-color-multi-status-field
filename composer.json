@@ -1,0 +1,34 @@
+{
+    "name": "jankapusta/nova-color-multi-status-field",
+    "description": "Laravel Nova field, for showing activity/status history by colorful row of squares (e.g. last 52 weeks activity).",
+    "keywords": [
+        "laravel",
+        "nova custom field",
+        "color matrix",
+        "multi status",
+        "activity history",
+        "color range",
+        "color map"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jankapusta\\NovaColorMultiStatusField\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jankapusta\\NovaColorMultiStatusField\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
