@@ -2329,7 +2329,8 @@ var render = function() {
                   staticClass: "colorMultiStatusTooltip absolute 10",
                   attrs: {
                     "x-cloak": "",
-                    "x-show.transition.origin.top": "tooltip"
+                    "x-show.transition.origin.top": "tooltip",
+                    "x-on:mouseleave": "tooltip = false"
                   }
                 },
                 [
@@ -2525,7 +2526,8 @@ var render = function() {
                         staticClass: "colorMultiStatusTooltip absolute 10",
                         attrs: {
                           "x-cloak": "",
-                          "x-show.transition.origin.top": "tooltip"
+                          "x-show.transition.origin.top": "tooltip",
+                          "x-on:mouseleave": "tooltip = false"
                         }
                       },
                       [
@@ -29176,7 +29178,8 @@ var render = function() {
                             staticClass: "colorMultiStatusTooltip absolute 10",
                             attrs: {
                               "x-cloak": "",
-                              "x-show.transition.origin.top": "tooltip"
+                              "x-show.transition.origin.top": "tooltip",
+                              "x-on:mouseleave": "tooltip = false"
                             }
                           },
                           [
