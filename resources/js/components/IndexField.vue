@@ -21,7 +21,7 @@
 <script>
 
 export default {
-  props: ['resourceName', 'field', 'setDefaultParams', 'prepareDataset', 'tooltip', 'pos', 'tooltipName', 'tooltipKey', 'useArray'],
+  props: ['resourceName', 'field', 'setDefaultParams', 'prepareDataset'],
   methods: {
     mousedown: function (ev, textKey, textName) {
       this.tooltip = !this.tooltip;

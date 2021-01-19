@@ -2,16 +2,16 @@
   <default-field :field="field" :errors="errors">
     <template slot="field">
       <table v-if="!field.readonly" class="colorMultiStatusForm table w-full">
-        <tr v-for="(rowData, index) in dataset">
+        <tr v-for="(rowData, index) in value">
           <td>
             <input v-if="!useArray" class="form-control form-input form-input-bordered"
-                   v-model="dataset[index]['key']"
+                   v-model="value[index]['key']"
                    required
             >
           </td>
           <td>
             <input class="form-control form-input form-input-bordered"
-                   v-model="dataset[index]['oneValue']"
+                   v-model="value[index]['oneValue']"
                    required
             >
           </td>
@@ -30,7 +30,7 @@
         </tr>
       </table>
       <div v-if="field.readonly" class="relative colorMultiStatusDisplay colorMultiStatusForm" :class="`text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
-        <div v-for="(oneItem, key) in dataset" class="inline-block" >
+        <div v-for="(oneItem, key) in value" class="inline-block" >
           <div class="colorMultiStatusIcon"
                v-on:mouseenter="mouseenter($event, oneItem.key, oneItem.oneValue)"
                v-on:mousemove.self="mousemove($event)"
@@ -55,7 +55,7 @@ import {FormField, HandlesValidationErrors} from 'laravel-nova'
 
 export default {
   mixins: [FormField, HandlesValidationErrors],
-  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset', 'tooltip', 'pos', 'tooltipName', 'tooltipKey', 'useArray'],
+  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset'],
   methods: {
     mousedown: function (ev, textKey, textName) {
       this.tooltip = !this.tooltip;
@@ -85,43 +85,43 @@ export default {
       this.tooltip = false;
     },
     /*
-     * Set the initial, internal dataset for the field.
+     * Set the initial, internal value for the field.
      */
     setInitialValue() {
-      // prepare dataset for rendering
+      // prepare value for rendering
       this.useArray = Array.isArray(this.field.value);
-      this.dataset = this.prepareDataset(this.field);
+      this.value = this.prepareDataset(this.field);
     },
 
     addValue() {
-      this.dataset.push({
+      this.value.push({
         key: 'new-key',
         oneValue: '',
       });
     },
 
     removeValue(index) {
-      this.dataset.splice(index, 1);
+      this.value.splice(index, 1);
     },
 
     /**
-     * Fill the given FormData object with the field's internal dataset.
+     * Fill the given FormData object with the field's internal value.
      */
     fill(formData) {
-      let dataset;
+      let result;
       if (this.useArray) {
-        dataset = this.dataset.map((one) => {
+        result = this.value.map((one) => {
           return one['oneValue'];
         });
       } else {
-        dataset = {};
-        this.dataset.forEach(one => {
-          dataset[one['key']] = one['oneValue'];
+        result = {};
+        this.value.forEach(one => {
+          result[one['key']] = one['oneValue'];
         });
       }
       formData.append(
           this.field.attribute,
-          JSON.stringify(dataset)
+          JSON.stringify(result)
       );
     },
   },
