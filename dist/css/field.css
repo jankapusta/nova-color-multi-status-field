@@ -1,7 +1,10 @@
 .colorMultiStatusTooltip {
   width: 140px;
   z-index: 10;
-  top: 15px;
-  left: 10px;
+  position: absolute;
+}
+
+.colorMultiStatusTooltip span {
+  color: dimgrey;
 }
 

@@ -2,16 +2,16 @@
   <default-field :field="field" :errors="errors">
     <template slot="field">
       <table v-if="!field.readonly" class="colorMultiStatusForm table w-full">
-        <tr v-for="(rowData, index) in value">
+        <tr v-for="(rowData, index) in dataset">
           <td>
             <input v-if="!useArray" class="form-control form-input form-input-bordered"
-                   v-model="value[index]['key']"
+                   v-model="dataset[index]['key']"
                    required
             >
           </td>
           <td>
             <input class="form-control form-input form-input-bordered"
-                   v-model="value[index]['oneValue']"
+                   v-model="dataset[index]['oneValue']"
                    required
             >
           </td>
@@ -30,14 +30,19 @@
         </tr>
       </table>
       <div v-if="field.readonly" :class="`colorMultiStatusDisplay colorMultiStatusForm text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
-        <div v-for="(oneItem, key) in value" x-data="{ tooltip: false }" class="relative inline-block" >
-          <div class="colorMultiStatusIcon" x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
-            <span class="inline-block" :style="`background-color: ${oneItem.color}; margin: ${field.iconSpacing}px; width: ${field.iconSize}px; height: ${field.iconSize}px;`"></span>
+        <div v-for="(oneItem, key) in dataset" class="relative inline-block" >
+          <div class="colorMultiStatusIcon"
+               v-on:mouseenter="mouseenter($event, oneItem.key, oneItem.oneValue)"
+               v-on:mousemove.self="mousemove($event)"
+               v-on:mouseleave="mouseleave()"
+               v-on:mousedown="mousedown($event, oneItem.key, oneItem.oneValue)"
+          >
+            <span class="inline-block" style="pointer-events:none;" :style="`background-color: ${oneItem.color}; margin: ${field.iconSpacing}px; width: ${field.iconSize}px; height: ${field.iconSize}px;`"></span>
           </div>
-          <div v-if="field.showTooltips" class="colorMultiStatusTooltip absolute 10" x-cloak x-show.transition.origin.top="tooltip" x-on:mouseleave="tooltip = false">
-            <div class="w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg" x-on:mouseleave="tooltip = false">
-              <span v-if="!useArray" class="tooltipKey" style="pointer-events:none;">{{oneItem.key}}:</span> {{oneItem.oneValue}}
-            </div>
+        </div>
+        <div v-if="field.showTooltips && tooltip" class="colorMultiStatusTooltip absolute 10" :style="`left: ${pos.left}px; top: ${pos.top}px`">
+          <div class="w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg">
+            <span v-if="!useArray" class="tooltipKey" style="pointer-events:none;">{{tooltipKey}}:</span> <b>{{tooltipName}}</b>
           </div>
         </div>
       </div>
@@ -50,52 +55,67 @@ import {FormField, HandlesValidationErrors} from 'laravel-nova'
 
 export default {
   mixins: [FormField, HandlesValidationErrors],
-
-  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset'],
-
-  created() {
-    this.field.value = this.field.value || {}
-    if (this.field.readonly) {
-      this.setDefaultParams(this.field);
-      if (this.field.showTooltips) {
-        require('alpinejs');
-      }
-    }
-  },
-
+  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset', 'tooltip', 'pos', 'tooltipName', 'tooltipKey', 'useArray'],
   methods: {
+    mousedown: function (ev, textKey, textName) {
+      this.tooltip = !this.tooltip;
+      this.tooltipKey = textKey;
+      this.tooltipName = textName;
+      this.pos = {
+        left: ev.layerX + 15,
+        top: ev.layerY + 15,
+      };
+    },
+    mouseenter: function(ev, textKey, textName) {
+      this.tooltip = true;
+      this.tooltipKey = textKey;
+      this.tooltipName = textName;
+      this.pos = {
+        left: ev.layerX + 15,
+        top: ev.layerY + 15,
+      };
+    },
+    mousemove: function(ev) {
+      this.pos = {
+        left: ev.layerX + 15,
+        top: ev.layerY + 15,
+      };
+    },
+    mouseleave: function() {
+      this.tooltip = false;
+    },
     /*
-     * Set the initial, internal value for the field.
+     * Set the initial, internal dataset for the field.
      */
     setInitialValue() {
       // prepare dataset for rendering
       this.useArray = Array.isArray(this.field.value);
-      this.value = this.prepareDataset(this.field);
+      this.dataset = this.prepareDataset(this.field);
     },
 
     addValue() {
-      this.value.push({
+      this.dataset.push({
         key: 'new-key',
         oneValue: '',
       });
     },
 
     removeValue(index) {
-      this.value.splice(index, 1);
+      this.dataset.splice(index, 1);
     },
 
     /**
-     * Fill the given FormData object with the field's internal value.
+     * Fill the given FormData object with the field's internal dataset.
      */
     fill(formData) {
       let dataset;
       if (this.useArray) {
-        dataset = this.value.map((one) => {
+        dataset = this.dataset.map((one) => {
           return one['oneValue'];
         });
       } else {
         dataset = {};
-        this.value.forEach(one => {
+        this.dataset.forEach(one => {
           dataset[one['key']] = one['oneValue'];
         });
       }
@@ -104,6 +124,17 @@ export default {
           JSON.stringify(dataset)
       );
     },
+  },
+  created() {
+    this.field.value = this.field.value || {}
+    if (this.field.readonly) {
+      this.setDefaultParams(this.field);
+      this.tooltip = false;
+      this.pos = {
+        left:0,
+        top:0,
+      };
+    }
   },
 }
 </script>
