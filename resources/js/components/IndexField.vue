@@ -12,7 +12,7 @@
       </div>
       <div v-if="field.showTooltips && tooltip" class="colorMultiStatusTooltip absolute 10" :style="`left: ${pos.left}px; top: ${pos.top}px`">
         <div class="w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg">
-          <span v-if="!useArray" class="tooltipKey" style="pointer-events:none;">{{tooltipKey}}:</span> <b>{{tooltipName}}</b>
+          <span v-if="!useArray" class="tooltipKey">{{tooltipKey}}:</span> <b>{{tooltipName}}</b>
         </div>
       </div>
   </div>
