@@ -2328,10 +2328,10 @@ var render = function() {
                 "div",
                 {
                   staticClass: "colorMultiStatusTooltip absolute 10",
-                  staticStyle: { "pointer-events": "none" },
                   attrs: {
                     "x-cloak": "",
-                    "x-show.transition.origin.top": "tooltip"
+                    "x-show.transition.origin.top": "tooltip",
+                    "x-on:mouseleave": "tooltip = false"
                   }
                 },
                 [
@@ -2339,13 +2339,19 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg"
+                        "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg",
+                      attrs: { "x-on:mouseleave": "tooltip = false" }
                     },
                     [
                       !_vm.useArray
-                        ? _c("span", { staticClass: "tooltipKey" }, [
-                            _vm._v(_vm._s(oneItem.key) + ":")
-                          ])
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "tooltipKey",
+                              staticStyle: { "pointer-events": "none" }
+                            },
+                            [_vm._v(_vm._s(oneItem.key) + ":")]
+                          )
                         : _vm._e(),
                       _vm._v(" " + _vm._s(oneItem.oneValue) + "\n        ")
                     ]
@@ -2526,10 +2532,10 @@ var render = function() {
                       "div",
                       {
                         staticClass: "colorMultiStatusTooltip absolute 10",
-                        staticStyle: { "pointer-events": "none" },
                         attrs: {
                           "x-cloak": "",
-                          "x-show.transition.origin.top": "tooltip"
+                          "x-show.transition.origin.top": "tooltip",
+                          "x-on:mouseleave": "tooltip = false"
                         }
                       },
                       [
@@ -2537,13 +2543,19 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg"
+                              "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg",
+                            attrs: { "x-on:mouseleave": "tooltip = false" }
                           },
                           [
                             !_vm.useArray
-                              ? _c("span", { staticClass: "tooltipKey" }, [
-                                  _vm._v(_vm._s(oneItem.key) + ":")
-                                ])
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "tooltipKey",
+                                    staticStyle: { "pointer-events": "none" }
+                                  },
+                                  [_vm._v(_vm._s(oneItem.key) + ":")]
+                                )
                               : _vm._e(),
                             _vm._v(
                               " " + _vm._s(oneItem.oneValue) + "\n          "
@@ -29179,10 +29191,10 @@ var render = function() {
                           "div",
                           {
                             staticClass: "colorMultiStatusTooltip absolute 10",
-                            staticStyle: { "pointer-events": "none" },
                             attrs: {
                               "x-cloak": "",
-                              "x-show.transition.origin.top": "tooltip"
+                              "x-show.transition.origin.top": "tooltip",
+                              "x-on:mouseleave": "tooltip = false"
                             }
                           },
                           [
@@ -29190,13 +29202,21 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg"
+                                  "w-32 p-2 -mt-1 text-sm leading-tight transform -translate-x-1/2 -translate-y-full bg-80 bg-white rounded-lg shadow-lg",
+                                attrs: { "x-on:mouseleave": "tooltip = false" }
                               },
                               [
                                 !_vm.useArray
-                                  ? _c("span", { staticClass: "tooltipKey" }, [
-                                      _vm._v(_vm._s(oneItem.key) + ":")
-                                    ])
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass: "tooltipKey",
+                                        staticStyle: {
+                                          "pointer-events": "none"
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(oneItem.key) + ":")]
+                                    )
                                   : _vm._e(),
                                 _vm._v(
                                   " " +
