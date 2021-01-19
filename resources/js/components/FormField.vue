@@ -55,7 +55,7 @@ import {FormField, HandlesValidationErrors} from 'laravel-nova'
 
 export default {
   mixins: [FormField, HandlesValidationErrors],
-  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset'],
+  props: ['resourceName', 'resourceId', 'field', 'setDefaultParams', 'prepareDataset', 'tooltip', 'pos', 'tooltipName', 'tooltipKey', 'useArray'],
   methods: {
     mousedown: function (ev, textKey, textName) {
       this.tooltip = !this.tooltip;

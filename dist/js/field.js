@@ -338,8 +338,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-
-    // set default params
     this.field.value = this.field.value || {};
     this.setDefaultParams(this.field);
     this.tooltip = false;
@@ -364,10 +362,8 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "relative",
-      class:
-        "colorMultiStatusDisplay colorMultiStatusIndex text-" +
-        _vm.field.textAlign,
+      staticClass: "relative colorMultiStatusDisplay colorMultiStatusIndex",
+      class: "text-" + _vm.field.textAlign,
       style:
         "line-height: " +
         _vm.field.iconSize +
@@ -436,14 +432,9 @@ var render = function() {
                 },
                 [
                   !_vm.useArray
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "tooltipKey",
-                          staticStyle: { "pointer-events": "none" }
-                        },
-                        [_vm._v(_vm._s(_vm.tooltipKey) + ":")]
-                      )
+                    ? _c("span", { staticClass: "tooltipKey" }, [
+                        _vm._v(_vm._s(_vm.tooltipKey) + ":")
+                      ])
                     : _vm._e(),
                   _vm._v(" "),
                   _c("b", [_vm._v(_vm._s(_vm.tooltipName))])
@@ -576,8 +567,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-
-    // set default params
     this.field.value = this.field.value || {};
     this.setDefaultParams(this.field);
     this.tooltip = false;
@@ -607,10 +596,9 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "relative",
-            class:
-              "colorMultiStatusDisplay colorMultiStatusDetail text-" +
-              _vm.field.textAlign,
+            staticClass:
+              "relative colorMultiStatusDisplay colorMultiStatusDetail",
+            class: "text-" + _vm.field.textAlign,
             style:
               "line-height: " +
               _vm.field.iconSize +
@@ -864,40 +852,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.tooltip = false;
     },
     /*
-     * Set the initial, internal dataset for the field.
+     * Set the initial, internal value for the field.
      */
     setInitialValue: function setInitialValue() {
-      // prepare dataset for rendering
+      // prepare value for rendering
       this.useArray = Array.isArray(this.field.value);
-      this.dataset = this.prepareDataset(this.field);
+      this.value = this.prepareDataset(this.field);
     },
     addValue: function addValue() {
-      this.dataset.push({
+      this.value.push({
         key: 'new-key',
         oneValue: ''
       });
     },
     removeValue: function removeValue(index) {
-      this.dataset.splice(index, 1);
+      this.value.splice(index, 1);
     },
 
 
     /**
-     * Fill the given FormData object with the field's internal dataset.
+     * Fill the given FormData object with the field's internal value.
      */
     fill: function fill(formData) {
-      var dataset = void 0;
+      var result = void 0;
       if (this.useArray) {
-        dataset = this.dataset.map(function (one) {
+        result = this.value.map(function (one) {
           return one['oneValue'];
         });
       } else {
-        dataset = {};
-        this.dataset.forEach(function (one) {
-          dataset[one['key']] = one['oneValue'];
+        result = {};
+        this.value.forEach(function (one) {
+          result[one['key']] = one['oneValue'];
         });
       }
-      formData.append(this.field.attribute, JSON.stringify(dataset));
+      formData.append(this.field.attribute, JSON.stringify(result));
     }
   },
   created: function created() {
@@ -27201,7 +27189,7 @@ var render = function() {
               "table",
               { staticClass: "colorMultiStatusForm table w-full" },
               [
-                _vm._l(_vm.dataset, function(rowData, index) {
+                _vm._l(_vm.value, function(rowData, index) {
                   return _c("tr", [
                     _c("td", [
                       !_vm.useArray
@@ -27210,21 +27198,21 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.dataset[index]["key"],
-                                expression: "dataset[index]['key']"
+                                value: _vm.value[index]["key"],
+                                expression: "value[index]['key']"
                               }
                             ],
                             staticClass:
                               "form-control form-input form-input-bordered",
                             attrs: { required: "" },
-                            domProps: { value: _vm.dataset[index]["key"] },
+                            domProps: { value: _vm.value[index]["key"] },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
                                 _vm.$set(
-                                  _vm.dataset[index],
+                                  _vm.value[index],
                                   "key",
                                   $event.target.value
                                 )
@@ -27240,21 +27228,21 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.dataset[index]["oneValue"],
-                            expression: "dataset[index]['oneValue']"
+                            value: _vm.value[index]["oneValue"],
+                            expression: "value[index]['oneValue']"
                           }
                         ],
                         staticClass:
                           "form-control form-input form-input-bordered",
                         attrs: { required: "" },
-                        domProps: { value: _vm.dataset[index]["oneValue"] },
+                        domProps: { value: _vm.value[index]["oneValue"] },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
                             _vm.$set(
-                              _vm.dataset[index],
+                              _vm.value[index],
                               "oneValue",
                               $event.target.value
                             )
@@ -27309,9 +27297,9 @@ var render = function() {
           ? _c(
               "div",
               {
-                class:
-                  "colorMultiStatusDisplay colorMultiStatusForm text-" +
-                  _vm.field.textAlign,
+                staticClass:
+                  "relative colorMultiStatusDisplay colorMultiStatusForm",
+                class: "text-" + _vm.field.textAlign,
                 style:
                   "line-height: " +
                   _vm.field.iconSize +
@@ -27320,8 +27308,8 @@ var render = function() {
                   ";"
               },
               [
-                _vm._l(_vm.dataset, function(oneItem, key) {
-                  return _c("div", { staticClass: "relative inline-block" }, [
+                _vm._l(_vm.value, function(oneItem, key) {
+                  return _c("div", { staticClass: "inline-block" }, [
                     _c(
                       "div",
                       {
