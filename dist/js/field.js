@@ -2279,8 +2279,9 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "colorMultiStatusDisplay colorMultiStatusIndex",
-      class: "text-" + _vm.field.textAlign,
+      class:
+        "colorMultiStatusDisplay colorMultiStatusIndex text-" +
+        _vm.field.textAlign,
       style:
         "line-height: " +
         _vm.field.iconSize +
@@ -2327,10 +2328,10 @@ var render = function() {
                 "div",
                 {
                   staticClass: "colorMultiStatusTooltip absolute 10",
+                  staticStyle: { "pointer-events": "none" },
                   attrs: {
                     "x-cloak": "",
-                    "x-show.transition.origin.top": "tooltip",
-                    "x-on:mouseleave": "tooltip = false"
+                    "x-show.transition.origin.top": "tooltip"
                   }
                 },
                 [
@@ -2476,8 +2477,9 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "colorMultiStatusDisplay colorMultiStatusDetail",
-            class: "text-" + _vm.field.textAlign,
+            class:
+              "colorMultiStatusDisplay colorMultiStatusDetail text-" +
+              _vm.field.textAlign,
             style:
               "line-height: " +
               _vm.field.iconSize +
@@ -2524,10 +2526,10 @@ var render = function() {
                       "div",
                       {
                         staticClass: "colorMultiStatusTooltip absolute 10",
+                        staticStyle: { "pointer-events": "none" },
                         attrs: {
                           "x-cloak": "",
-                          "x-show.transition.origin.top": "tooltip",
-                          "x-on:mouseleave": "tooltip = false"
+                          "x-show.transition.origin.top": "tooltip"
                         }
                       },
                       [
@@ -29128,8 +29130,9 @@ var render = function() {
           ? _c(
               "div",
               {
-                staticClass: "colorMultiStatusDisplay colorMultiStatusForm",
-                class: "text-" + _vm.field.textAlign,
+                class:
+                  "colorMultiStatusDisplay colorMultiStatusForm text-" +
+                  _vm.field.textAlign,
                 style:
                   "line-height: " +
                   _vm.field.iconSize +
@@ -29176,10 +29179,10 @@ var render = function() {
                           "div",
                           {
                             staticClass: "colorMultiStatusTooltip absolute 10",
+                            staticStyle: { "pointer-events": "none" },
                             attrs: {
                               "x-cloak": "",
-                              "x-show.transition.origin.top": "tooltip",
-                              "x-on:mouseleave": "tooltip = false"
+                              "x-show.transition.origin.top": "tooltip"
                             }
                           },
                           [
