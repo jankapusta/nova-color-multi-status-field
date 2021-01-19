@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" :class="`colorMultiStatusDisplay colorMultiStatusIndex text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
+  <div class="relative colorMultiStatusDisplay colorMultiStatusIndex" :class="`text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
       <div v-for="(oneItem, key) in dataset" class="inline-block" >
         <div class="colorMultiStatusIcon"
              v-on:mouseenter="mouseenter($event, oneItem.key, oneItem.oneValue)"
@@ -52,8 +52,6 @@ export default {
     }
   },
   created() {
-
-    // set default params
     this.field.value = this.field.value || {}
     this.setDefaultParams(this.field);
     this.tooltip = false;

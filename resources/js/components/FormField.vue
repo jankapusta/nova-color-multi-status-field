@@ -29,8 +29,8 @@
           </td>
         </tr>
       </table>
-      <div v-if="field.readonly" :class="`colorMultiStatusDisplay colorMultiStatusForm text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
-        <div v-for="(oneItem, key) in dataset" class="relative inline-block" >
+      <div v-if="field.readonly" class="relative colorMultiStatusDisplay colorMultiStatusForm" :class="`text-${field.textAlign}`" :style="`line-height: ${field.iconSize}px; width: ${field.width};`">
+        <div v-for="(oneItem, key) in dataset" class="inline-block" >
           <div class="colorMultiStatusIcon"
                v-on:mouseenter="mouseenter($event, oneItem.key, oneItem.oneValue)"
                v-on:mousemove.self="mousemove($event)"
